@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 import {Layout} from 'antd'
 import memoryUtils from '../../utils/memoryUtils'
-import Header from '../../components/header'
+import HeaderNAV from '../../components/header'
 import LeftNav from '../../components/left-nav'
 import Home from '../home/home'
 import Category from '../category/category'
@@ -14,7 +14,7 @@ import Line from '../charts/line'
 import Pie from '../charts/pie'
 
 
-const { Footer, Sider, Content } = Layout
+const { Header, Footer, Sider, Content } = Layout
 export default class Admin extends Component {
     render() {
         const user = memoryUtils.user
@@ -22,15 +22,27 @@ export default class Admin extends Component {
             return <Redirect to='/login' />
         }
         return (
-            <Layout>
-            <Header>
-                <Header/>
-            </Header>
-            <Layout>
-              <Sider><LeftNav/></Sider>
-              <Content>Content</Content>
-            </Layout>
-            <Footer>推荐使用谷歌浏览器， 可以获得更佳页面操作体验</Footer>
+            <Layout style={{ height: '100%' }}>
+                <Sider>
+                    <LeftNav/>
+                </Sider>
+                <Layout>
+                    <Header><HeaderNAV/></Header>
+                    <Content>
+                        <Switch>
+                            <Route path='/home' component={Home} />
+                            <Route path='/category' component={Category} />
+                            <Route path='/product' component={Product} />
+                            <Route path='/role' component={Role} />
+                            <Route path='/user' component={User} />
+                            <Route path='/charts/bar' component={Bar} />
+                            <Route path='/charts/line' component={Line} />
+                            <Route path='/charts/pie' component={Pie} />
+                            <Redirect to='/home' />
+                        </Switch>
+                    </Content>
+                    <Footer>Ant Design CMS @2020 Ceated by Shepherd</Footer>
+                </Layout>
           </Layout>
         )
     }
