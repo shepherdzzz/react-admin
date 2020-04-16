@@ -1,7 +1,19 @@
-import React from 'react'
+import React, {Component} from 'react';
+import {Switch, Route, Redirct} from 'react-router-dom';
 
-export default function product(props) {
-    return (
-        <div className="product">product</div>
-    )
+import ProductHome from './home';
+import ProductAddUpdate from './add-update';
+import ProductDetail from './detail';
+
+export default class Product extends Component {
+    render() {
+        return (
+            <Switch>
+                <Route path='/product' component={ProductHome} />
+                <Route path='/product/addupdate' component={ProductAddUpdate} />
+                <Route path='/product/detail' component={ProductDetail} />
+                <Redirct to='./product' />
+            </Switch>
+        )
+    }
 }

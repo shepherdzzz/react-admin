@@ -21,3 +21,27 @@ export function reqWeather(city) {
         )
     })
 }
+
+export const reqCategorys = (parentId) => ajax('/manage/category/list', {parentId})
+
+export const reqAddCategory = (parentId, categoryName) => ajax('manage/category/add',
+{
+    parentId,
+    categoryName
+}, 'POST'
+)
+
+export const reqUpdateCategory = ({categoryId, categoryName}) => ajax('manage/category/update', {
+    categoryId,
+    categoryName,
+}, 'POST')
+
+export const reqProduct = (pageNum, pageSize) => ajax('manage/product/list', {pageNum, pageSize})
+
+export const reqSearchProducts = ({pageNum, pageSize, searchType, searchName}) => ajax('/manage/product/search', {pageNum, pageSize, [searchType]: searchName, })
+
+export const reqAddOrUpdateProduct = (product) => ajax('/manage/product/' + (product._id? 'update' : 'add'), product, 'POST')
+
+export const reqUpdateProductStatus = (productId, status) => ajax('manage/product/updateStatus', {productId, status}, 'POST')
+
+export const reqDeleteImg = (name) => ajax('manage/img/delete', name, 'POST')
