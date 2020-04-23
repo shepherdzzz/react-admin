@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {List, Card} from 'antd'
-import {LeftOutlined} from 'ant-design/icons'
+import {LeftOutlined} from '@ant-design/icons'
 
 import {reqCategory} from '../../api'
 import {BASE_IMG_PATH} from '../../utils/constants'

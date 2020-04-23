@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Select, Input, Button, Table, message, } from 'antd'
-import { PlusSquareOutlined } from 'antd-design/icon'
+import { PlusSquareOutlined } from '@ant-design/icons'
 
 import LinkButton from '../../components/link-button'
 import { reqProducts, reqSearchProducts, reqUpdateProductStatus } from '../../api'

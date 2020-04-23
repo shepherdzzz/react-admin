@@ -1,6 +1,6 @@
 import React from 'react';
 import PorpTypes from 'prop-types';
-import { Upload, Moadl, message } from 'antd';
+import { Upload, Modal, message } from 'antd';
 import {PlusOutlined} from '@ant-design/icons'
 
 import { BASE_IMG_PATH, UPLOAD_IMG_NAME } from '../../utils/constants'
@@ -68,7 +68,7 @@ export default class PictureWall extends React.Component {
         this.setState({fileList})
     }
     render (){
-        const {previewVisible, perviewImage, fileList} = this.state
+        const {previewVisible, previewImage, fileList} = this.state
 
         const uploadButton = (
             <div>
@@ -90,9 +90,9 @@ export default class PictureWall extends React.Component {
                 >
                     {uploadButton}
                 </Upload>
-                <Moadl visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-                    <img src="example" src={previewImage} style={{width: '100%'}} />
-                </Moadl>
+                <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
+                <img alt="example" style={{ width: '100%' }} src={previewImage} />
+                </Modal>
             </div>
         )
     }

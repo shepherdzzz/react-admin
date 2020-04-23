@@ -2,13 +2,16 @@ import React, {Component} from 'react';
 import {Card, Form, Input, Cascader, Button, message} from 'antd';
 import LinkButton from '../../components/link-button'
 import PicturesWall from './picture-wall'
-import {reqCategorys, reqAddOrUpdateProduct} from '../../api'
-import {LeftOutlined} from 'ant-design/icons'
+import {reqCategory, reqAddOrUpdateProduct} from '../../api'
+import {LeftOutlined} from '@ant-design/icons'
 import RichtextEditor from './rich-text-editor';
 
 const {Item} = Form
 const {TextArea}  = Input
 
+/*
+Product的添加和更新的子路由组件
+ */
 class ProductAddUpdate extends Component{
     state =  {
         option: [],
@@ -16,6 +19,7 @@ class ProductAddUpdate extends Component{
 
     constructor(props){
         super(props);
+        // 创建用来保存ref标识的标签对象的容器
         this.pw = React.createRef();
         this.editor = React.createRef()
     }
@@ -41,7 +45,7 @@ class ProductAddUpdate extends Component{
     }
 
     getCategorys = async (parentId) => {
-        const result = await reqCategorys(parentId)
+        const result = await reqCategory(parentId)
         if(result.state===0){
             const categorys = result.data
             if(parentId===0){

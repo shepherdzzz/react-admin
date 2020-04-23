@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const { Option } = Select;
 
 class AddForm extends Component {
-    const [form] = Form.useForm();
+    // const [form] = Form.useForm();
      static propTypes ={
          categorys: PropTypes.array.isRequired,
          parentId: PropTypes.string.isRequired,
@@ -19,13 +19,14 @@ class AddForm extends Component {
     render () {
         const {categorys, parentId} = this.props;
         return (
-            <Form form={form}>
+            // <Form form={form}>
+            <Form >
                 <Form.Item name="parentId" label="parentId" initialValues={parentId}>
                     <Select >
                         <Option key='0' value='0' >一级分类目录</Option>
-{/*                         {
+                        {
                             categorys.map(c => <Option key={c._id} value={c._id}>{c._name}</Option>)
-                        } */}
+                        }
                     </Select>
                 </Form.Item>
                 <Form.Item label='分类名称' name='category' initialValues={''}>

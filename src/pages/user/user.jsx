@@ -4,7 +4,7 @@ import { Card, Button, Table, Modal } from 'antd'
 import LinkButton from '../../components/link-button'
 import UserForm from './user-form'
 import { reqUsers, reqAddOrUpdateUser, reqDeleteUser } from '../../api'
-import { formateDate } from '../../utils/dataUtils'
+import { formateDate } from '../../utils/dateUtils'
 import { PAGE_SIZE } from '../../utils/constants'
 
 export default class User extends Component {

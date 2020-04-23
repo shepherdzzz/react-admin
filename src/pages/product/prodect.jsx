@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Switch, Route, Redirct} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 
 import ProductHome from './home';
 import ProductAddUpdate from './add-update';
@@ -12,7 +12,7 @@ export default class Product extends Component {
                 <Route path='/product' component={ProductHome} />
                 <Route path='/product/addupdate' component={ProductAddUpdate} />
                 <Route path='/product/detail' component={ProductDetail} />
-                <Redirct to='./product' />
+                <Redirect to='./product' />
             </Switch>
         )
     }

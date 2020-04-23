@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import { Button, Card, Modal,Table, message } from 'antd'
 import LinkButton from '../../components/link-button'
-import {reqCategorys, reqUpdateCategory, reqAddCategory} from '../../api'
+import {reqCategory, reqUpdateCategory, reqAddCategory} from '../../api'
 import AddForm from './add-form'
 import UpdateForm from './update-form'
 import {PlusOutlined, RightOutlined} from '@ant-design/icons'
@@ -22,7 +22,7 @@ export default class Category extends Component {
             loading: true
         })
         parentId = parentId ||this.state.parentId
-        const result = await reqCategorys(parentId)
+        const result = await reqCategory(parentId)
         this.setState({
             loading:false
         })

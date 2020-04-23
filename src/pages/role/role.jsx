@@ -5,7 +5,7 @@ import { reqRoles, reqAddRole, reqUpdateRole } from '../../api'
 import AddForm from './add-form'
 import AuthForm from './auth-form'
 import memoryUtils from '../../utils/memoryUtils'
-import { formateDate } from '../../utils/dataUtils'
+import { formateDate } from '../../utils/dateUtils'
 
 export default class Role extends PureComponent {
     state = {
