@@ -126,7 +126,7 @@ export default class Role extends PureComponent {
                 <Table
                     bordered
                     rowKey='_id'
-                    dataSource={role}
+                    dataSource={roles}
                     columns={this.colums}
                     pagination={{ defaultPageSize: PAGE_SIZE }}
                     rowSelection={{ type: 'radio', selectedRowKeys: [role._id] }}

@@ -9,7 +9,7 @@ export default class Product extends Component {
     render() {
         return (
             <Switch>
-                <Route path='/product' component={ProductHome} />
+                <Route path='/product' component={ProductHome} exact/>
                 <Route path='/product/addupdate' component={ProductAddUpdate} />
                 <Route path='/product/detail' component={ProductDetail} />
                 <Redirect to='./product' />

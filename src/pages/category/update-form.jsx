@@ -19,7 +19,7 @@ class UpdateForm extends Component {
         const {categoryName} = this.props;
         return (
             <Form>
-                <Form.Item name="categoryName" label="categoryName" initialValues={categoryName}>
+                <Form.Item name="categoryName" label="分类名称" initialValues={categoryName}>
                     <Input placeholder='请输入分类名称' />
                 </Form.Item>
             </Form>

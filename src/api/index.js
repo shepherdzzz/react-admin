@@ -8,7 +8,7 @@ export function reqWeather() {
     return new Promise((resolve, reject) => {
         const url = `https://tianqiapi.com/api?version=v61&appid=18754824&appsecret=rkHmPZu8`
         jsonp(url, {}, (err, data) => {
-            console.log('jsonp()', err, data)
+            // console.log('jsonp()', err, data)
             if (!err ) {
                 const { city,wea } = data
                 resolve({ city, wea })

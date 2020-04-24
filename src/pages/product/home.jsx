@@ -22,6 +22,9 @@ export default class ProductHome extends Component {
         }
     }
 
+    /*
+    初始化table的列的数组
+     */
     initColumns = () => {
         this.columns = [
             {
@@ -35,64 +38,63 @@ export default class ProductHome extends Component {
             {
                 title: '价格',
                 dataIndex: 'price',
-                render: (price) => <span>{price}</span>
+                render: (price) => '¥' + price  // 当前指定了对应的属性, 传入的是对应的属性值
             },
             {
-                title: '状态',
                 width: 100,
-                dataIndex: 'status',
-                render: (status, product) => {
-                    let btnText = '下架';
-                    let statusText = '在售';
-
-                    if (status === 2) {
-                        btnText = '上架';
-                        statusText = '已下架'
-                    }
-                    status = status === 1 ? 2 : 1
-
+                title: '状态',
+                // dataIndex: 'status',
+                render: (product) => {
+                    const { status, _id } = product
+                    const newStatus = status === 1 ? 2 : 1
                     return (
                         <span>
-                            <Button onClick={() => this.updateProductStatus(product._id, status)}>{btnText}</Button>
-                            <span>{statusText}</span>
+                            <Button
+                                type='primary'
+                                onClick={() => this.updateStatus(_id, newStatus)}
+                            >
+                                {status === 1 ? '下架' : '上架'}
+                            </Button>
+                            <span>{status === 1 ? '在售' : '已下架'}</span>
                         </span>
                     )
                 }
             },
             {
+                width: 100,
                 title: '操作',
-                width:100,
-                render: (product) => (
-                    <span>
-                        <LinkButton onClick={()=>this.props.history.push('/product/detail/', product)}>详情</LinkButton>
-                        &nbsp;&nbsp;&nbsp;
-                        <LinkButton onClick={()=>this.props.history.push('product/addupdate', product)}> 修改</LinkButton>
-                    </span>
-                )
+                render: (product) => {
+                    return (
+                        <span>
+                            {/*将product对象使用state传递给目标路由组件*/}
+                            <LinkButton onClick={() => this.props.history.push('/product/detail', { product })}>详情</LinkButton>
+                            <LinkButton onClick={() => this.props.history.push('/product/addupdate', product)}>修改</LinkButton>
+                        </span>
+                    )
+                }
             },
-        ]
+        ];
     }
 
     getProducts = async (pageNum) => {
         this.pageNum = pageNum
-        const {searchType, searchName} = this.state
+        const {  searchName, searchType } = this.state
         let result
         if (searchName) {
-            result = await reqSearchProducts({pageNum, pageSize:PAGE_SIZE, searchType, searchName})
+            result = await reqSearchProducts({ pageNum, pageSize: PAGE_SIZE, searchType, searchName })
         } else {
             result = await reqProducts(pageNum, PAGE_SIZE)
         }
         console.log('getProducts()', result)
-        if(result.state===0){
-            const {total, list}= result.data
+        if (result.state === 0) {
+            const { total, list } = result.data
             this.setState({
-                total,products: list
+                total, products: list
             })
         }
     }
-
     componentWillMount() {
-        this.initColums()
+        this.initColumns()
     }
 
     componentDidMount() {
@@ -100,21 +102,21 @@ export default class ProductHome extends Component {
     }
 
     render() {
-        const {products, total, searchType} = this.state
+        const { products, total, searchType } = this.state
 
         const title = (
             <span>
-                <Select value={searchType} onChange={value=>this.setState({searchType:value})}>
+                <Select value={searchType} onChange={value => this.setState({ searchType: value })}>
                     <Select.Option key='productName' value='productName'>按名称搜索</Select.Option>
                     <Select.Option key='productDesc' value='productDesc'>按描述搜索</Select.Option>
                 </Select>
-                <Input style={{width: 150, marginLeft: 10, marginRight: 10}} placeholder='关键词' onChange={(e) => this.setState({searchName:e.target.value})} />
-                <Button type='primary' onClick={()=>this.getProducts(1)}>搜索</Button>
+                <Input style={{ width: 150, marginLeft: 10, marginRight: 10 }} placeholder='关键词' onChange={(e) => this.setState({ searchName: e.target.value })} />
+                <Button type='primary' onClick={() => this.getProducts(1)}>搜索</Button>
             </span>
         )
 
-        const extra =(
-            <Button type='primary'  style={{float:'right'}} onClick={()=> this.props.history.push('/product/addupdate')}>
+        const extra = (
+            <Button type='primary' style={{ float: 'right' }} onClick={() => this.props.history.push('/product/addupdate')}>
                 <PlusSquareOutlined />添加商品
             </Button>
         )
@@ -122,16 +124,16 @@ export default class ProductHome extends Component {
             <div>
                 <Card title={title} extra={extra}>
                     <Table
-                    bordered
-                    rowKey='_id'
-                    columns={this.columns}
-                    dataSource={products}
-                    pagination={{
-                        defaultPageSize:PAGE_SIZE,
-                        total,
-                        showQuickJumper: true,
-                        onChange: this.getProducts
-                    }}
+                        bordered
+                        rowKey='_id'
+                        columns={this.columns}
+                        dataSource={products}
+                        pagination={{
+                            defaultPageSize: PAGE_SIZE,
+                            total,
+                            showQuickJumper: true,
+                            onChange: this.getProducts
+                        }}
                     />
                 </Card>
             </div>
